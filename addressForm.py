@@ -17,7 +17,14 @@
 import tkinter as tk
 
 def submit():
-    oString = f'{name1ent.get()} {name2ent.get()}\n{address1ent.get()}\n{address2ent.get()}\n{cityEnt.get()}, {stateEnt.get()} {postalCodeEnt.get()}\n{countryEnt.get()}'
+    # opens file and read contents into string
+    inFile = open('addresses.txt', 'r')
+    iString = inFile.read()
+    inFile.close()
+    
+    # format output and store in string
+    oString = f'\n{name1ent.get()} {name2ent.get()}\n{address1ent.get()}\n{address2ent.get()}\n{cityEnt.get()}, {stateEnt.get()} {postalCodeEnt.get()}\n{countryEnt.get()}\n'
+    # delete contents of all entry fields
     name1ent.delete(0,tk.END)
     name2ent.delete(0,tk.END)
     address1ent.delete(0,tk.END)
@@ -26,8 +33,10 @@ def submit():
     stateEnt.delete(0,tk.END)
     postalCodeEnt.delete(0,tk.END)
     countryEnt.delete(0,tk.END)
+
+    # Open output file, adds contents and closes file  
     outFile = open('addresses.txt', 'w')
-    outFile.write(oString)
+    outFile.write(iString + oString)
     outFile.close()
 
 window = tk.Tk() # Assign window to variable called window
